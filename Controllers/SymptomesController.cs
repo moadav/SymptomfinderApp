@@ -13,6 +13,7 @@ namespace Symptomfinder.Controllers
     public class SymptomesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        // Finish the CSV functionality
         private async void SetDatabaseWithCSVElements()
         {
             IEnumerable<Symptome> symptomes = ConvertCSV.ConvertCSVFile.ReadfromCSVFiles();
