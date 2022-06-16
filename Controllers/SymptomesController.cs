@@ -13,15 +13,7 @@ namespace Symptomfinder.Controllers
     public class SymptomesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        // Finish the CSV functionality
-        private async void SetDatabaseWithCSVElements()
-        {
-            IEnumerable<Symptome> symptomes = ConvertCSV.ConvertCSVFile.ReadfromCSVFiles();
-            foreach (Symptome symptome in symptomes)
-                _context.Symptome.Add(symptome);
 
-            await _context.SaveChangesAsync();
-        }
         public SymptomesController(ApplicationDbContext context)
         {
             _context = context;
@@ -42,7 +34,6 @@ namespace Symptomfinder.Controllers
 
         public async Task<IActionResult> SearchDiseaseResults(string SearchPhrase)
         {
- 
             return View("Index", await _context.Symptome.Where(s => s.Name.Contains(SearchPhrase) || s.Symptoms.Contains(SearchPhrase)).ToListAsync());
         }
 

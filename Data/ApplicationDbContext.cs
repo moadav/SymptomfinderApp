@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Symptomfinder.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Symptomfinder.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
+        private int id = 0;
+        IEnumerable<Symptome> symptomes = ConvertCSV.ConvertCSVFile.ReadfromCSVFiles();
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -18,6 +21,26 @@ namespace Symptomfinder.Data
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            // add your own configuration here
+
+            foreach (Symptome symptome in symptomes)
+            {
+                id += 1;
+                modelBuilder.Entity<Symptome>().HasData(new Symptome
+                {
+                    Id = id,
+                    Treatment = symptome.Treatment,
+                    Symptoms = symptome.Symptoms,
+                    Name = symptome.Name,
+                    Causes = symptome.Causes
+                });
+            }
+        }
+
         public DbSet<Symptomfinder.Models.Symptome> Symptome { get; set; }
     }
 }
