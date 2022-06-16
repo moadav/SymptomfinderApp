@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Welcome to SymptomeFinder app.</p>
+
+
+        <section class="grid">
+            <a class="grid-container" asp-area="" asp-controller="Symptomes" asp-action="Index" > Search</a>
+            <a class="grid-container" asp-area="" asp-controller="Symptomes" asp-action="SearchDisease" > Information</a>
+        </section>
+
+
+
+    </div>
+</body>
