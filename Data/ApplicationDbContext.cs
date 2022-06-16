@@ -11,7 +11,7 @@ namespace Symptomfinder.Data
     public class ApplicationDbContext : DbContext
     {
         private int id = 0;
-        IEnumerable<Symptome> symptomes = ConvertCSV.ConvertCSVFile.ReadfromCSVFiles();
+        private IEnumerable<Symptome> symptomes = ConvertCSV.ConvertCSVFile.ReadfromCSVFiles();
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -41,6 +41,6 @@ namespace Symptomfinder.Data
             }
         }
 
-        public DbSet<Symptomfinder.Models.Symptome> Symptome { get; set; }
+        public DbSet<Symptome> Symptome { get; set; }
     }
 }
