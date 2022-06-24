@@ -31,12 +31,15 @@ namespace Symptomfinder.Controllers
         }
 
 
-
+       
         public async Task<IActionResult> SearchDiseaseResults(string SearchPhrase)
         {
-            return View("Index", await _context.Symptome.Where(s => s.Name.Contains(SearchPhrase) || s.Symptoms.Contains(SearchPhrase)).ToListAsync());
+            return View("Index", await _context.Symptome.Where(Element => Element.Name.Contains(SearchPhrase.ToLower()) || Element.Symptoms.Contains(SearchPhrase.ToLower())).ToListAsync());
         }
-
+        public async Task<IActionResult> FilterDiseaseResults(string Choice)
+        {
+            return View("Index", await _context.Symptome.Where(Element => Element.Name.Contains(Choice.ToLower()) || Element.Symptoms.Contains(Choice.ToLower())).ToListAsync());
+        }
         // GET: Symptomes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

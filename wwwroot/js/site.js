@@ -11,7 +11,13 @@ function AddItemsToSearch() {
     const li_element = document.createElement("li");
 
     li_element.appendChild(document.createTextNode(SearchLabel.value));
-
+    
     document.getElementById("SearchOption").appendChild(li_element);
     
+}
+
+function GetSearchResults() {
+    let list = document.getElementById("SearchOption").getElementsByTagName('li');
+    list.
+    console.log(list[0].innerHTML)
 }

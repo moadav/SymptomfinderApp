@@ -1,4 +1,25 @@
-﻿
+﻿@model IEnumerable<Symptomfinder.Models.Symptome>
+
+
+@{
+    ViewData["Title"] = "Search Disease";
+
+    var Common_Symptoms = new List<string>();
+    Common_Symptoms.Add("headache");
+    Common_Symptoms.Add("dizziness");
+    Common_Symptoms.Add("weakness");
+    Common_Symptoms.Add("upset stomach");
+    Common_Symptoms.Add("vomiting");
+    Common_Symptoms.Add("chest pain");
+    Common_Symptoms.Add("confusion");
+
+
+
+}
+
+
+
+
 <head>
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -9,26 +30,40 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form >
-            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
+        <form asp-action="SearchDiseaseResults">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label for="SearchPhrase" class="control-label"></label>
-                <input id="SearchLabel" name="SearchPhrase" class="form-control"  />
+                <input id="SearchLabel" name="SearchPhrase" class="form-control" />
+
             </div>
 
             <div class="form-group">
-                <input type="Button" value="Search" class="btn btn-primary" onclick="AddItemsToSearch()"/>
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
         </form>
-
-        <ul id="SearchOption">      
-          
-        </ul>
-
     </div>
+
+
+    <form asp-action="FilterDiseaseResults">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <select name="Choice">
+            <option disabled selected> -- select an option -- </option>
+            @foreach (var Symptom in Common_Symptoms)
+            {
+                <option value=@Symptom>@Symptom</option>
+            }
+        </select>
+        <input type="submit" value="Filter" class="btn btn-primary" />
+
+    </form>
+
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
