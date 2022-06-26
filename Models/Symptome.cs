@@ -10,10 +10,6 @@ namespace Symptomfinder.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public string Symptoms { get; set; }
-
-        public string Causes { get; set; }
-
-        public string Treatment { get; set; }
+        public string SymptomInformation { get; set; }
     }
 }

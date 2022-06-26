@@ -32,11 +32,9 @@ namespace Symptomfinder.Data
                 id += 1;
                 modelBuilder.Entity<Symptome>().HasData(new Symptome
                 {
-                    Id = id,
-                    Treatment = symptome.Treatment,
-                    Symptoms = symptome.Symptoms,
+                    Id = id, 
                     Name = symptome.Name,
-                    Causes = symptome.Causes
+                    SymptomInformation = symptome.SymptomInformation
                 });
             }
         }
