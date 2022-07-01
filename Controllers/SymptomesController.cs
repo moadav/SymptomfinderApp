@@ -26,20 +26,97 @@ namespace Symptomfinder.Controllers
         }
 
         public IActionResult SearchDisease()
-        {      
-            return View();
+        {
+
+            return View(PopulateCheckBoxFilter());
         }
 
 
-       
+
         public async Task<IActionResult> SearchDiseaseResults(string SearchPhrase)
         {
-            return View("Index", await _context.Symptome.Where(Element => Element.Name.Contains(SearchPhrase.ToLower()) || Element.SymptomInformation.Contains(SearchPhrase.ToLower())).ToListAsync());
+            if (SearchPhrase == null)
+                return View("SearchDisease");
+
+
+            return View("Index", await _context.Symptome.Where(Element => Element.SymptomInformation.Contains(SearchPhrase.ToLower())).ToListAsync());
         }
-        public async Task<IActionResult> FilterDiseaseResults(string Choice)
+
+        public async Task<IActionResult> FilterDiseaseResults(string[] filter)
         {
-            return View("Index", await _context.Symptome.Where(Element => Element.Name.Contains(Choice.ToLower()) || Element.SymptomInformation.Contains(Choice.ToLower())).ToListAsync());
+
+            List<SelectListItem> items = PopulateCheckBoxFilter();
+            List<Symptome> symptomes = _context.Symptome.ToList();
+            foreach (SelectListItem item in items)
+            {
+                if (filter.Contains(item.Value))
+                {
+                    item.Selected = true;
+                    foreach (Symptome symp in symptomes.ToList())
+                    {
+                        if (!symp.SymptomInformation.Contains(item.Text))
+                            symptomes.Remove(symp);
+                    }
+                }
+
+            }
+          
+
+            return View("Index", symptomes);
         }
+        private List<SelectListItem> PopulateCheckBoxFilter()
+        {
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (Filter filter in _context.Filter.ToArray())
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = filter.Name.ToString(),
+                    Value = filter.Id.ToString()
+
+                });
+            }
+            return items;
+        }
+        private List<string> FindNonNull(string headache, string dizziness, string weakness, string stomach, string vomiting, string chest, string confusion)
+        {
+            List<string> NotNull = new List<string>();
+            if (headache != null)
+            {
+                NotNull.Add(headache);
+            }
+            if (dizziness != null)
+            {
+                NotNull.Add(dizziness);
+            }
+            if (weakness != null)
+            {
+                NotNull.Add(weakness);
+            }
+            if (stomach != null)
+            {
+                NotNull.Add(stomach);
+            }
+            if (vomiting != null)
+            {
+                NotNull.Add(vomiting);
+            }
+            if (chest != null)
+            {
+                NotNull.Add(chest);
+            }
+            if (confusion != null)
+            {
+                NotNull.Add(confusion);
+
+            }
+
+            return NotNull;
+
+        }
+
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

@@ -21,3 +21,13 @@ function GetSearchResults() {
     list.
     console.log(list[0].innerHTML)
 }
+
+function ErrorMessage() {
+    
+    const AnErrorMessage = document.getElementById("ErrorMessage");
+    const searchInput = document.getElementById("SearchLabel");
+
+    if (searchInput.innerHTML.length > 0)
+        AnErrorMessage.innerHTML = "Search bar cannot be zero!"
+        
+}

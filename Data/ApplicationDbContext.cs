@@ -19,6 +19,8 @@ namespace Symptomfinder.Data
 
         public ApplicationDbContext()
         {
+           
+
 
         }
 
@@ -26,6 +28,14 @@ namespace Symptomfinder.Data
         {
 
             // add your own configuration here
+            var Common_Symptoms = new List<Filter>();
+            Common_Symptoms.Add(new Filter {  Name ="headache" });
+            Common_Symptoms.Add(new Filter { Name = "dizziness" });
+            Common_Symptoms.Add(new Filter { Name = "weakness" });
+            Common_Symptoms.Add(new Filter { Name = "stomach" });
+            Common_Symptoms.Add(new Filter { Name = "vomiting" });
+            Common_Symptoms.Add(new Filter { Name = "chest" });
+            Common_Symptoms.Add(new Filter { Name = "confusion" });
 
             foreach (Symptome symptome in symptomes)
             {
@@ -34,11 +44,25 @@ namespace Symptomfinder.Data
                 {
                     Id = id, 
                     Name = symptome.Name,
-                    SymptomInformation = symptome.SymptomInformation
+                    SymptomInformation = symptome.SymptomInformation,
+                    
+                });
+            }
+
+            foreach (Filter filter in Common_Symptoms)
+            {
+                id += 1;
+                modelBuilder.Entity<Filter>().HasData(new Filter
+                {
+                    Id = id,
+                    Name = filter.Name,
+                     
+                   
                 });
             }
         }
 
         public DbSet<Symptome> Symptome { get; set; }
+        public DbSet<Filter> Filter { get; set; }
     }
 }
