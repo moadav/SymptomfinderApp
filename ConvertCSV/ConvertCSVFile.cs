@@ -16,14 +16,14 @@ namespace Symptomfinder.ConvertCSV
 
         private static IEnumerable<Symptome> ReadfromCSV1File()
         {
-           
+
             List<Symptome> Symptomes = new List<Symptome>();
             Regex pattern = new Regex("[^0-9a-zA-Z]+");
             int symptomenr = 0;
             var Data = File.ReadAllLines(@"C:\Users\Mohammed Ali Davami\source\repos\Symptomfinder\CSV\df_diseases.csv")
                         .Skip(1)
                         .Select(column => column.Split(','));
-  
+
             foreach (String[] lines in Data)
             {
                 Symptomes.Add(new Symptome
@@ -36,8 +36,8 @@ namespace Symptomfinder.ConvertCSV
                 }
                 symptomenr += 1;
             }
-           
-      
+
+
             return Symptomes;
         }
 
@@ -46,7 +46,7 @@ namespace Symptomfinder.ConvertCSV
         {
 
             List<Symptome> Symptomes = new List<Symptome>();
-      
+
             int symptomenr = 0;
             Regex pattern1 = new Regex("[^0-9a-zA-Z]+");
             Regex pattern2 = new Regex(@"[\d-]");
@@ -55,7 +55,7 @@ namespace Symptomfinder.ConvertCSV
                         .Select(column => column.Split(','));
 
 
-     
+
             foreach (String[] lines in Data)
             {
                 Symptomes.Add(new Symptome
@@ -78,7 +78,7 @@ namespace Symptomfinder.ConvertCSV
         private static IEnumerable<Symptome> ReadfromCSV3File()
         {
             Regex pattern = new Regex("[^0-9a-zA-Z]+");
-           
+
             var Data = File.ReadAllLines(@"C:\Users\Mohammed Ali Davami\source\repos\Symptomfinder\CSV\OHAS Dataset.csv")
                         .Skip(1)
                         .Select(column => column.Split(','))
@@ -88,24 +88,24 @@ namespace Symptomfinder.ConvertCSV
                             SymptomInformation = pattern.Replace(column[2], " "),
                         });
 
-           var DataList = new List<Symptome>();
-           DataList = Data.ToList();
+            var DataList = new List<Symptome>();
+            DataList = Data.ToList();
 
-            for(int i = 0; i < DataList.Count; i++)
+            for (int i = 0; i < DataList.Count; i++)
             {
                 for (int j = 0; j < DataList.Count; j++)
                 {
                     if (DataList[i].Name.Equals(DataList[j].Name))
                     {
-                      DataList[i].SymptomInformation += ", " +DataList[j].SymptomInformation;
-                      DataList.Remove(DataList[j]);
+                        DataList[i].SymptomInformation += ", " + DataList[j].SymptomInformation;
+                        DataList.Remove(DataList[j]);
 
 
 
                     }
                 }
             }
-        
+
 
             return DataList;
         }
@@ -114,9 +114,7 @@ namespace Symptomfinder.ConvertCSV
         {
             var ResultList1 = ReadfromCSV1File().Concat(ReadfromCSV3File());
 
-             var ResultList = ResultList1.Concat(ReadfromCSV2File());
-
-            //var ResultList = ReadfromCSV3File();
+            var ResultList = ResultList1.Concat(ReadfromCSV2File());
 
             var DataList = ResultList.ToList();
 
