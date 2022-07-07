@@ -24,10 +24,21 @@ function GetSearchResults() {
 
 function ErrorMessage() {
     
-    const AnErrorMessage = document.getElementById("ErrorMessage");
-    const searchInput = document.getElementById("SearchLabel");
+    const SearchLabel = document.getElementById("SearchLabel");
 
-    if (searchInput.innerHTML.length > 0)
-        AnErrorMessage.innerHTML = "Search bar cannot be zero!"
+    const AnErrorMessage = document.getElementById("ErrorMessage");
+
+    const SearchButton = document.getElementById("SearchButton");
+
+    if (SearchLabel.value.length < 4) {
+        SearchButton.disabled = true;
+        AnErrorMessage.innerHTML = "Search input cannot be lower than two letters";
+        
+    } else {
+        SearchButton.disabled = false;
+        AnErrorMessage.innerHTML = "";
+    }
+
+    
         
 }

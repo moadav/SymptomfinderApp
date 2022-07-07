@@ -26,12 +26,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label for="SearchPhrase" class="control-label"></label>
-                <input id="SearchLabel" name="SearchPhrase" class="form-control" onchange="ErrorMessage"/>
+                <input id="SearchLabel" name="SearchPhrase" class="form-control" onchange="ErrorMessage()" />
 
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary"  />
+                <input id="SearchButton" type="submit" value="Search" class="btn btn-primary" disabled />
             </div>
         </form>
     </div>
@@ -44,26 +44,31 @@
         
         
 
-        <table>
+        <table id="tableContents">
             @foreach (var filter in Model)
             {
-                <tr>
+                <tr >
                     <td>
-                        <input id="@filter.Value" type="checkbox" name="Filter" value="@filter.Value" checked="@filter.Selected" />
+                       
+                        <label class="myCheckBoxLabels" onclick="ErrorMessage()" for="@filter.Value">
+                            <input class="myCheckboxes" id="@filter.Value" type="checkbox" name="Filter" value="@filter.Value" checked="@filter.Selected" />
+
+                            @filter.Text
+
+                        </label>
                     </td>
-                    <td>
-                        <label for="@filter.Value">@filter.Text</label>
-                    </td>
+                    
+                   
                 </tr>
             }
         </table>
 
 
 
-        <input type="submit" value="Filter" class="btn btn-primary" />
+        <input id="FilterButton" type="submit" value="Filter" class="btn btn-primary" disabled />
 
     </form>
-    <span id="ErrorMessage"></span>
+    
 </div>
 
 <div>
@@ -73,3 +78,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<p id="ErrorMessage"> asdasdas</p>
