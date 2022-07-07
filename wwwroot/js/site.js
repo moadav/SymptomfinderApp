@@ -4,24 +4,12 @@
 // Write your JavaScript code.
 
 
-function AddItemsToSearch() {
-   
-    const SearchLabel = document.getElementById("SearchLabel");
 
-    const li_element = document.createElement("li");
-
-    li_element.appendChild(document.createTextNode(SearchLabel.value));
-    
-    document.getElementById("SearchOption").appendChild(li_element);
-    
-}
-
-function GetSearchResults() {
-    let list = document.getElementById("SearchOption").getElementsByTagName('li');
-    list.
-    console.log(list[0].innerHTML)
-}
-
+/*
+ * 
+ * Function that handles the search input to make sure it is used as intended
+ * 
+ */
 function ErrorMessage() {
     
     const SearchLabel = document.getElementById("SearchLabel");
@@ -39,7 +27,11 @@ function ErrorMessage() {
         AnErrorMessage.innerHTML = "";
     }      
 }
-
+/*
+ *
+ * Function that handles the filter checkboxes to make sure it is used as intended
+ *
+ */
 function FilterMessage() {
     
     const FilterButton = document.getElementById("FilterButton");
