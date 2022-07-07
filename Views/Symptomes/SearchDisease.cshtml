@@ -50,8 +50,8 @@
                 <tr >
                     <td>
                        
-                        <label class="myCheckBoxLabels" onclick="ErrorMessage()" for="@filter.Value">
-                            <input class="myCheckboxes" id="@filter.Value" type="checkbox" name="Filter" value="@filter.Value" checked="@filter.Selected" />
+                        <label class="myCheckBoxLabels" for="@filter.Value">
+                            <input class="myCheckboxes" id="@filter.Value" type="checkbox" name="Filter" value="@filter.Value" checked="@filter.Selected" onclick="FilterMessage()"/>
 
                             @filter.Text
 
@@ -78,4 +78,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<p id="ErrorMessage"> asdasdas</p>
+<p id="ErrorMessage"> </p>

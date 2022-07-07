@@ -116,3 +116,8 @@ input[type=checkbox]:hover {
     text-align: center;
     color: red;
 }
+
+#FilterButton:disabled {
+    background-color: red;
+    border-color: red;
+}

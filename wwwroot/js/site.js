@@ -32,13 +32,22 @@ function ErrorMessage() {
 
     if (SearchLabel.value.length < 4) {
         SearchButton.disabled = true;
-        AnErrorMessage.innerHTML = "Search input cannot be lower than two letters";
+        AnErrorMessage.innerHTML = "Search input cannot be lower than three letters";
         
     } else {
         SearchButton.disabled = false;
         AnErrorMessage.innerHTML = "";
-    }
+    }      
+}
 
+function FilterMessage() {
     
-        
+    const FilterButton = document.getElementById("FilterButton");
+
+    let CheckBoxes = document.querySelectorAll('input[name="Filter"]:checked');
+
+    if (CheckBoxes.length > 0)
+        FilterButton.disabled = false;
+    else
+        FilterButton.disabled = true;
 }
